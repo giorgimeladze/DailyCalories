@@ -10,4 +10,24 @@ class Meal < ApplicationRecord
   def ate_meal_at_time
     self.ate_meal_at.strftime('%H:%M')
   end
+
+  def ate_meal_at_year
+    self.ate_meal_at.strftime('%Y')
+  end
+
+  def ate_meal_at_month
+    self.ate_meal_at.strftime('%m')
+  end
+
+  def ate_meal_at_day
+    self.ate_meal_at.strftime('%d')
+  end
+
+  def ate_meal_at_hour
+    self.ate_meal_at.strftime('%H')
+  end
+
+  def ate_meal_at_minute
+    self.ate_meal_at.strftime('%M')
+  end
 end
