@@ -1,1 +1,15 @@
 <h1>Home</h1>
+
+<%= link_to 'About', about_path %>
+<br>
+<% if current_user %>
+  <%= link_to 'all meals', meals_path %>
+  <br>
+  <%= link_to 'Edit Your Profile', edit_user_registration_path %>
+  <br>
+  <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= link_to 'Log in', new_user_session_path %>
+  <br>
+  <%= link_to 'Register', new_user_registration_path %>
+<% end %>
