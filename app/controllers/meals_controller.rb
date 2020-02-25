@@ -1,8 +1,4 @@
 class MealsController < ApplicationController
-  def index
-    @meals = current_user.meals
-  end
-
   def new
     @meal = Meal.new
   end
@@ -18,6 +14,11 @@ class MealsController < ApplicationController
       flash[:danger] = "Check you attributes again"
       render :new
     end
+  end
+  
+  def index
+    @meals = current_user.meals
+    @meals = @meals.paginate(page: params[:page], per_page: 8)
   end
 
   def show
@@ -46,7 +47,7 @@ class MealsController < ApplicationController
     flash[:notice] = "Meal was removed from your daily ration"
     redirect_to meals_path
   end
-  
+
   private
   def meal_params
     params.require(:meal).permit(:name,:calories)

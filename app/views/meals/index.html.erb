@@ -1,0 +1,12 @@
+<h1 align="center">Your Daily List</h1>
+
+<div align="center">
+  <%= will_paginate %>
+</div>
+<%= render 'listing', meals: @meals %>
+<div align="center">
+  <%= will_paginate %>
+</div>
+
+<%= link_to 'Add Meal', new_meal_path,
+                              class: "btn btn-xs btn-success" %>

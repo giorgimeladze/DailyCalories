@@ -1,0 +1,19 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Calories</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% meals.each do |meal| %>
+      <tr>
+        <th scope="row"><%= meal.name %></th>
+        <td><%= meal.calories %></td>
+        <td><%= link_to 'Show', meal %></td>
+        <td><%= link_to 'Edit', edit_meal_path(meal) %></td>
+        <td><%= link_to 'Remove', meal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
