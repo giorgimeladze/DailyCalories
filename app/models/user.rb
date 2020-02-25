@@ -6,6 +6,8 @@ class User < ApplicationRecord
   validates_presence_of :daily_calories
   has_many :meals
 
+  enum status: {default_user: 0, manager: 1, admin: 2}
+
   def first_name
     self.name.split.first
   end
