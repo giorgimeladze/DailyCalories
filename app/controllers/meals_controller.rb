@@ -15,7 +15,7 @@ class MealsController < ApplicationController
       render :new
     end
   end
-  
+
   def index
     @meals = current_user.meals
     @meals = @meals.paginate(page: params[:page], per_page: 8)
@@ -50,6 +50,6 @@ class MealsController < ApplicationController
 
   private
   def meal_params
-    params.require(:meal).permit(:name,:calories)
+    params.require(:meal).permit(:name,:calories,:ate_meal_at)
   end
 end

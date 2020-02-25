@@ -3,13 +3,17 @@
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Calories</th>
+      <th scope="col">Date</th>
+      <th scope="col">Time</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody style="color:<%= color %>">
     <% meals.each do |meal| %>
       <tr>
         <th scope="row"><%= meal.name %></th>
         <td><%= meal.calories %></td>
+        <td><%= meal.ate_meal_at_date %></td>
+        <td><%= meal.ate_meal_at_time %></td>
         <td><%= link_to 'Show', meal %></td>
         <td><%= link_to 'Edit', edit_meal_path(meal) %></td>
         <td><%= link_to 'Remove', meal, method: :delete, data: { confirm: 'Are you sure?' } %></td>

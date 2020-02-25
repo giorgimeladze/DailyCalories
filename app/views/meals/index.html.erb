@@ -3,7 +3,11 @@
 <div align="center">
   <%= will_paginate %>
 </div>
-<%= render 'listing', meals: @meals %>
+<% if @meals.inject(0){|sum,x| sum + x.calories} < current_user.daily_calories %>
+  <%= render 'listing', meals: @meals, color: "green" %>
+<% else  %>
+  <%= render 'listing', meals: @meals, color: "red" %>
+<% end %>
 <div align="center">
   <%= will_paginate %>
 </div>
