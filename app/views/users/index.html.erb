@@ -1,0 +1,35 @@
+<div align="center">
+  <%= will_paginate %>
+</div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Second Name</th>
+        <th scope="col">Daily Calories</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <th scope="row"><%= user.first_name %></th>
+          <td scope="row"><%= user.last_name %></td>
+          <td><%= user.daily_calories %></td>
+          <td><%= user.status %></td>
+          <% if user != current_user %>
+            <td><%= link_to 'Show', user %></td>
+          <% end %>
+          <% if (current_user.admin? || current_user.manager?)  %>
+            <% if !(current_user.manager? && user.admin) %>
+              <td><%= link_to 'Edit', edit_user_registration_path(user) %></td>
+              <td><%= link_to 'Remove', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<div align="center">
+  <%= will_paginate %>
+</div>

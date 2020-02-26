@@ -1,0 +1,19 @@
+<h1 align="center"> <%= @user.full_name %></h1>
+
+<p>First Name: <%= @user.first_name %></p>
+<p>Second Name: <%= @user.last_name %></p>
+<p>Daily Calories: <%= @user.daily_calories %></p>
+<p style="color:green"> Status: <%= @user.status %></p>
+
+<br>
+<div align="center">
+  <%= will_paginate @meals%>
+</div>
+<% if @meals.inject(0){|sum,x| sum + x.calories} < @user.daily_calories %>
+  <%= render 'meals/listing', meals: @meals, user: @user, color: "green" %>
+<% else  %>
+  <%= render 'meals/listing', meals: @meals, user: @user, color: "red" %>
+<% end %>
+<div align="center">
+  <%= will_paginate @meals%>
+</div>

@@ -9,11 +9,13 @@ class User < ApplicationRecord
   enum status: {default_user: 0, manager: 1, admin: 2}
 
   def first_name
-    self.name.split.first
+    return self.name.split.first if self.name
+    "Anonymous"
   end
 
   def last_name
-    self.name.split.last
+    return self.name.split.last if self.name
+    ""
   end
 
   def full_name
