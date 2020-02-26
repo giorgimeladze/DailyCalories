@@ -32,4 +32,10 @@
   <%= will_paginate @meals%>
 </div>
 
+<% if current_user.admin? %>
+  <%= link_to 'Add Meal', new_meal_path(id: @user.id),
+                              class: "btn btn-xs btn-success" %>
+<% end %>
+<br><br>
+
 <%= link_to "Back", users_path %>
