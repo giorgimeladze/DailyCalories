@@ -1,11 +1,16 @@
 class MealsController < ApplicationController
   def new
     @meal = Meal.new
+    if params[:id]
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
   end
 
   def create
     @meal = Meal.new(meal_params)
-    @meal.user = current_user
+    @meal.user = User.find(params[:id])
 
     if @meal.save
       flash[:notice] = "Meal was added"

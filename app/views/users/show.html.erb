@@ -1,0 +1,41 @@
+<h1 align="center"> <%= @user.full_name %></h1>
+
+<p>First Name: <%= @user.first_name %></p>
+<p>Second Name: <%= @user.last_name %></p>
+<p>Daily Calories: <%= @user.daily_calories %></p>
+<p style="color:green"> Status: <%= @user.status %></p>
+
+<% if current_user.manager? || current_user.admin? %>
+  <% if @user.default_user? %>
+    <%= link_to 'Make manager', make_manager_user_path(@user) %>
+  <% end %>
+  <% if @user.manager? %>
+    <%= link_to "Make default user", make_default_user_user_path(@user) %>
+  <% end %>
+  <% if current_user.admin? %>
+    <% unless @user.admin? %>
+      <%= link_to "Make admin", make_admin_user_path(@user) %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<br>
+<div align="center">
+  <%= will_paginate @meals%>
+</div>
+<% if @meals.inject(0){|sum,x| sum + x.calories} < @user.daily_calories %>
+  <%= render 'meals/listing', meals: @meals, user: @user, color: "green" %>
+<% else  %>
+  <%= render 'meals/listing', meals: @meals, user: @user, color: "red" %>
+<% end %>
+<div align="center">
+  <%= will_paginate @meals%>
+</div>
+
+<% if current_user.admin? %>
+  <%= link_to 'Add Meal', new_meal_path(id: @user.id),
+                              class: "btn btn-xs btn-success" %>
+<% end %>
+<br><br>
+
+<%= link_to "Back", users_path %>

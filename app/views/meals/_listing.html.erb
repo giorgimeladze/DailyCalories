@@ -14,9 +14,11 @@
         <td><%= meal.calories %></td>
         <td><%= meal.ate_meal_at_date %></td>
         <td><%= meal.ate_meal_at_time %></td>
-        <td><%= link_to 'Show', meal %></td>
-        <td><%= link_to 'Edit', edit_meal_path(meal) %></td>
-        <td><%= link_to 'Remove', meal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if user == current_user || current_user.admin? %>
+          <td><%= link_to 'Show', meal %></td>
+          <td><%= link_to 'Edit', edit_meal_path(meal) %></td>
+          <td><%= link_to 'Remove', meal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
