@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates_presence_of :daily_calories
-  has_many :meals
+  has_many :meals, dependent: :destroy
 
   enum status: {default_user: 0, manager: 1, admin: 2}
 
