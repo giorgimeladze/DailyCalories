@@ -5,6 +5,20 @@
 <p>Daily Calories: <%= @user.daily_calories %></p>
 <p style="color:green"> Status: <%= @user.status %></p>
 
+<% if current_user.manager? || current_user.admin? %>
+  <% if @user.default_user? %>
+    <%= link_to 'Make manager', make_manager_user_path(@user) %>
+  <% end %>
+  <% if @user.manager? %>
+    <%= link_to "Make default user", make_default_user_user_path(@user) %>
+  <% end %>
+  <% if current_user.admin? %>
+    <% unless @user.admin? %>
+      <%= link_to "Make admin", make_admin_user_path(@user) %>
+    <% end %>
+  <% end %>
+<% end %>
+
 <br>
 <div align="center">
   <%= will_paginate @meals%>

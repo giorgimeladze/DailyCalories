@@ -23,9 +23,18 @@
               <% if !(current_user.manager? && user.admin?) %>
                 <td><%= link_to 'Edit', edit_user_path(user) %></td>
                 <td><%= link_to 'Remove', user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                <% if current_user.admin? %>
-                  <td><%=  'Make Manager', user.manager!, render: :index %></td>
-                  <td><%=  'Make Admin', user.admin!, render: :index %></td>
+                <% if current_user.manager? || current_user.admin? %>
+                  <% if user.default_user? %>
+                    <td><%= link_to 'Make manager', make_manager_user_path(user) %></td>
+                  <% end %>
+                  <% if user.manager? %>
+                    <td><%= link_to "Make default user", make_default_user_user_path(user) %></td>
+                  <% end %>
+                  <% if current_user.admin? %>
+                    <% unless user.admin? %>
+                      <td><%= link_to "Make admin", make_admin_user_path(user) %></td>
+                    <% end %>
+                  <% end %>
                 <% end %>
               <% end %>
             <% end %>

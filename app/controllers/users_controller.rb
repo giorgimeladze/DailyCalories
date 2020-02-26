@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :check_status, except: [:show, :index]
-  before_action :check_admin_and_manager, only: [:edit,:update,:destroy]
+  before_action :check_admin_and_manager, only: [:edit,:update,:destroy, :make_admin]
 
   def index
     @users = User.all.paginate(page: params[:page], per_page: 5)
@@ -48,6 +48,24 @@ class UsersController < ApplicationController
     @user.destroy
     flash[:notice] = "User was removed"
     redirect_to users_path
+  end
+
+  def make_admin
+    @user = User.find(params[:id])
+    @user.admin!
+    redirect_to users_path, notice: "your chosen user is admin"
+  end
+
+  def make_manager
+    @user = User.find(params[:id])
+    @user.manager!
+    redirect_to users_path, notice: "your chosen user is manager"
+  end
+
+  def make_default_user
+    @user = User.find(params[:id])
+    @user.default_user!
+    redirect_to users_path, notice: "your chosen user is default user"
   end
 
   private

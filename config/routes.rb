@@ -5,5 +5,11 @@ Rails.application.routes.draw do
 
   root 'welcome#home'
   get 'about', to: 'welcome#about'
-  resources :users
+  resources :users do
+    member do
+      get :make_admin
+      get :make_default_user
+      get :make_manager
+    end
+  end
 end
