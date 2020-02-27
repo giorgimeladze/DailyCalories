@@ -8,5 +8,15 @@
   <%= @meal.calories %>
 </p>
 
+<p>
+  <strong>Date: </strong>
+  <%= @meal.ate_meal_at_date %>
+</p>
+
+<p>
+  <strong>Time: </strong>
+  <%= @meal.ate_meal_at_time %>
+</p>
+
 <%= link_to 'Edit', edit_meal_path(@meal) %> |
 <%= link_to 'Back', meals_path %>
