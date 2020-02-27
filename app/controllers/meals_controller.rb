@@ -11,6 +11,11 @@ class MealsController < ApplicationController
     @meals = current_user.meals.to_a
     @meals.select! {|meal| meal.ate_meal_at >= (DateTime.parse("#{start_date} #{start_time}") - (4.0/24.0))}
     @meals.select! {|meal| meal.ate_meal_at <= (DateTime.parse("#{end_date} #{end_time}") - (4.0/24.0))}
+    if start_time >= end_time
+      @meals.select!{|meal| meal.ate_meal_at_time > start_time || meal.ate_meal_at_time < end_time}
+    else
+      @meals.select!{|meal| meal.ate_meal_at_time < end_time && meal.ate_meal_at_time > start_time}
+    end
     @meals = @meals.sort_by {|meal| meal.ate_meal_at}.reverse
     @meals = @meals.paginate(page: params[:page], per_page: 5)
   end
