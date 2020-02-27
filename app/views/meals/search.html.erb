@@ -1,0 +1,30 @@
+<h1 align="center"></h1>
+
+<div class="container">
+  <p>Date and Time should be enter in such way: 2011(year)-01(month)-01(day) 10(hour):00(minute)</p>
+</div>
+
+<%= form_with url: result_url, local: true, method: :get do |form| %>
+  <div class="field">
+    <%= form.label :start_date %>
+    <%= form.text_field :start_date %>
+  </div>
+  <div class="field">
+    <%= form.label :end_date %>
+    <%= form.text_field :end_date %>
+  </div>
+  <div class="field">
+    <%= form.label :start_time %>
+    <%= form.text_field :start_time %>
+  </div>
+  <div class="field">
+    <%= form.label :end_time %>
+    <%= form.text_field :end_time %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Search"%>
+  </div>
+<% end %>
+
+<%= link_to "Listing", meals_path, class: "btn btn-primary" %>
