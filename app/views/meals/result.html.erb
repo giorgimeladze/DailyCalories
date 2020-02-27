@@ -1,0 +1,15 @@
+<h1 align="center">Results of the search</h1>
+
+<% if @meals.blank? %>
+  <p> There is nothing</p>
+<% end %>
+<div align="center">
+  <%= will_paginate @meals %>
+</div>
+<%= render 'listing', meals: @meals, color: "", user: current_user %>
+<div align="center">
+  <%= will_paginate @meals %>
+</div>
+
+<%= link_to "Back to search", search_meals_path, class: "btn btn-primary" %>
+<%= link_to "Back to meals Listing", meals_path, class: "btn btn-primary" %>

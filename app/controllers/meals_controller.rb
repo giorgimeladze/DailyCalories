@@ -1,4 +1,20 @@
 class MealsController < ApplicationController
+
+  def search
+  end
+
+  def result
+    start_date = params[:start_date]
+    end_date = params[:end_date]
+    start_time = params[:start_time]
+    end_time = params[:end_time]
+    @meals = current_user.meals.to_a
+    @meals.select! {|meal| meal.ate_meal_at >= (DateTime.parse("#{start_date} #{start_time}") - (4.0/24.0))}
+    @meals.select! {|meal| meal.ate_meal_at <= (DateTime.parse("#{end_date} #{end_time}") - (4.0/24.0))}
+    @meals = @meals.sort_by {|meal| meal.ate_meal_at}.reverse
+    @meals = @meals.paginate(page: params[:page], per_page: 5)
+  end
+
   def new
     @meal = Meal.new
     if params[:id]
@@ -24,6 +40,7 @@ class MealsController < ApplicationController
   def index
     @meals = current_user.get_todays_meals
     @meals = @meals.to_a.sort_by {|meal| meal.ate_meal_at}.reverse
+    @meals = @meals.paginate(page: params[:page], per_page: 8)
   end
 
   def show
