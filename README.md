@@ -6,4 +6,4 @@ Daily Calories app, assignment
 
 * Rails version 5.2.4.1
 
-* Heroku Link
+* Heroku Link https://daily-calories-app.herokuapp.com

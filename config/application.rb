@@ -17,7 +17,7 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-ENV.update YAML.load(File.read(File.expand_path('../local_env.yml', __FILE__)))
+#ENV.update YAML.load(File.read(File.expand_path('../local_env.yml', __FILE__)))
 
 module DailyCalories
   class Application < Rails::Application
