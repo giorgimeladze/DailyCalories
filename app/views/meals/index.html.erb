@@ -1,16 +1,14 @@
 <h1 align="center">Your Daily List</h1>
 
-<div align="center">
-  <%= will_paginate %>
-</div>
-<% if @meals.inject(0){|sum,x| sum + x.calories} < current_user.daily_calories %>
-  <%= render 'listing', meals: @meals, user: current_user, color: "green" %>
-<% else  %>
-  <%= render 'listing', meals: @meals, user: current_user, color: "red" %>
+<% if @meals.blank? %>
+  <p style="color:red">User hasn't eaten anything today</p>
+<% else %>
+  <% if @meals.inject(0){|sum,x| sum + x.calories} < current_user.daily_calories %>
+    <%= render 'listing', meals: @meals, user: current_user, color: "green" %>
+  <% else  %>
+    <%= render 'listing', meals: @meals, user: current_user, color: "red" %>
+  <% end %>
 <% end %>
-<div align="center">
-  <%= will_paginate %>
-</div>
 
 <%= link_to 'Add Meal', new_meal_path,
                               class: "btn btn-xs btn-success" %>

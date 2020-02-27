@@ -22,8 +22,8 @@ class MealsController < ApplicationController
   end
 
   def index
-    @meals = current_user.meals
-    @meals = @meals.paginate(page: params[:page], per_page: 8)
+    @meals = current_user.get_todays_meals
+    @meals = @meals.to_a.sort_by {|meal| meal.ate_meal_at}.reverse
   end
 
   def show

@@ -27,6 +27,9 @@
           <li class="nav-item">
             <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
           </li>
+          <p>
+            <%= current_user.full_name %>
+          </p>
         <% else %>
           <li class="nav-item">
             <%= link_to 'Register', new_user_registration_path, class: 'nav-link' %>

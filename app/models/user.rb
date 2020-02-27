@@ -18,8 +18,16 @@ class User < ApplicationRecord
     ""
   end
 
+  def total_calories
+    self.meals.inject(0){|sum,x| sum + x.calories}
+  end
+
   def full_name
     return "#{first_name} #{last_name}" if first_name || last_name
     "Anonymous"
+  end
+
+  def get_todays_meals
+    self.meals.where("ate_meal_at >= ?", DateTime.now.in_time_zone("Tbilisi").beginning_of_day)
   end
 end
